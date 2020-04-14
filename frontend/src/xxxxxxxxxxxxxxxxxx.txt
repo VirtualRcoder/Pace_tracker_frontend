@@ -1,0 +1,219 @@
+import logo from './logo.svg';
+import './App.css';
+import React, { Component } from "react";
+import Home from'./Home.js';
+import Login from'./Login.js';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+
+class App extends Component {
+	constructor(props){
+		super();
+		this.state = {
+			loggedInStatus: "NOT_LOGGED_IN",
+			user: {}
+		};
+
+		this.handleLogin = this.handleLogin.bind(this);
+	}
+
+	handleLogin(data){
+		this.setState({
+			loggedInStatus: "LOGGED_IN",
+			user: data
+		})
+	}
+
+  render(){
+    return(
+      <div>
+      <Router>
+      	<Route exact path={"/"} 
+      	render={props => (<Home {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus}/>
+      	)}
+      	/>
+      	<Route exact path="/l" 
+      	render={props => (<Login {...props}   loggedInStatus={this.state.loggedInStatus}/>
+      	)}
+      	/>
+      </Router>  
+      </div>
+      );
+  }
+}      
+
+
+export default App;
+
+//App.js extends
+
+import React, { Component } from 'react';
+import cookie from 'react-cookies';
+import 'whatwg-fetch';
+
+class Register extends Component {
+//Constructor
+  constructor(props){
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.state = {
+      email: null,
+      password: null,
+    }
+  }
+//Handle the Default Input behaviour
+  handleInputChange(event){
+    event.preventDefault()
+    let key= event.target.name
+    let value= event.target.value
+    this.setState({
+      [key]: value
+    })
+  }
+//Handle the Default Output behaviour
+  handleSubmit(event){
+    event.preventDefault()
+    let data= this.state
+    this.Registration(data)
+  }
+//Registration Taking Place 
+  Registration(data){
+    const endpoint = 'http://127.0.0.1:8000/api/auth/register'
+    const csrfToken = cookie.load('csrftoken')
+    let com= this
+    
+    if(csrfToken !== undefined){
+      let lookupOptions = {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify(data),
+        credentials: 'include'
+      }
+
+      fetch(endpoint, lookupOptions)
+      .then(function(response){
+        return response.json()
+      })
+      .then(function(responseData){
+        if(responseData.error_type)
+          alert(responseData.error_type)
+        if(responseData.is_active===true){
+            alert("You have registered Successfully!!  Redirecting to Login Page")
+            com.props.handleSuccessfulAuth(responseData)
+        }
+      })
+      .catch(function(error){
+        console.log("error", error)
+      })
+    }  
+  }
+
+//Rendering Output  
+  render(){
+    return(
+      <form onSubmit={this.handleSubmit}>
+        <h1>Registeration Page</h1>
+          <div className='form-group'>
+            <label for="email">Email</label>
+            <input id="email" type="text" name="email" className="form-control" placeholder="Enter the email" onChange={this.handleInputChange} required="true"/>
+          </div>    
+           <div className='form-group'>
+            <label for="password">Password</label>
+            <input id="password" type="text" name="password" className="form-control" placeholder="Enter the password" onChange={this.handleInputChange} required="true"/>
+           </div>
+          <button className="btn btn-primary">Register</button>
+        </form>
+      )  
+   }
+}
+
+export default Register;
+
+
+
+
+
+
+
+//import React, { Component } from "react";
+//import cookie from 'react-cookies'
+//import 'whatwg-fetch'
+//import Register from 'register';
+//class App extends Component {
+//  Registration(){
+//    const endpoint = 'http://127.0.0.1:8000/api/auth/register'
+//    const csrfToken = cookie.load('csrftoken')
+//    let data = {
+//    "email": "x@gmail.com",
+//    "password": "1"
+//    }
+//
+//  if(csrfToken !== undefined){
+//    let lookupOptions = {
+//      method: "POST",
+//      headers: {
+//        'Content-Type': 'application/json',
+//        'X-CSRFToken': csrfToken
+//      },
+//      body: JSON.stringify(data),
+//      credentials: 'include'
+//    }
+//
+//    fetch(endpoint, lookupOptions)
+//    .then(function(response){
+//      return response.json()
+//    })
+//    .then(function(responseData){
+//      console.log(responseData)
+//      if(responseData.is_active==true){
+//        console.log("You have registered Successfully")
+//      }
+//    })
+//    .catch(function(error){
+//      console.log("error", error)
+//    })
+//  }  
+//  }
+//
+//  componentDidMount(){
+//    this.Registration()
+//  }
+//  render(){
+//    return(
+//      <h1>Registration Page</h1>
+//      );
+//  }
+//}      
+//
+//export default App;
+//Register.js ends
+
+
+
+import React, { Component } from "react";
+import Register from'./register.js';
+import Login from'./Login.js';
+
+export default class Home extends Component{
+
+  constructor(props){
+    super(props);
+    this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
+  }
+
+  handleSuccessfulAuth(data){
+    this.props.handleLogin(data);
+    this.props.history.push("/l");
+  }
+
+  render(){
+    return(
+      <Register handleSuccessfulAuth= {this.handleSuccessfulAuth}/>
+    );
+  }
+}
+
+//home.js ends

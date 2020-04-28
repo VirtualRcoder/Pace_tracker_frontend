@@ -19,7 +19,6 @@ class Company extends Component{
 			<Jumbotron style={{backgroundColor:"lightgreen"}}>
 				<Jumbotron>
 					Modified at:-&nbsp;{modified}<br/>
-					Project:-&nbsp;{project}<br/><br/>
 					Task:- &nbsp;{task}<br/>
 					Time Period:- &nbsp;{time_period}<br/>
 					Comment:- &nbsp;{comment}

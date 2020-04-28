@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import cookie from 'react-cookies';
 import 'whatwg-fetch';
 import tes from "./x.jpg";
-import i1 from "./i1.jpeg";
+import i1 from "./components/i1.jpeg";
 import i2 from "./i2.jpeg";
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
@@ -67,9 +67,9 @@ class Login extends Component {
 		    	console.log(window.localStorage)
 		      	alert("You have Login Successfully!! Moving to Dashboard")
 		      	if(responseData.is_staff==true)
-			      	com.props.history.push("/d");
+			      	com.props.history.push("/lc");
 			    else
-			    	com.props.history.push("/d1");
+			    	com.props.history.push("/ut");
 		    }
 		  })
 		  .catch(function(error){

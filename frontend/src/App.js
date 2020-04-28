@@ -27,14 +27,18 @@ import Padmin from './components/company_page/padmin';
 import Create_Project from './components/project/New_Project';
 import Project_Page from './components/project/project_page';
 import Client_Page from './components/project/client_page';
+import Regular_Page from './components/project/regular_page';
 
 import Standup from './components/standup/standup';
 import Create_Standup from './components/standup/New_Standup';
+import Create_Standup1 from './components/standup/New_Standup1';
 
 import Timesheet from './components/time_entry/timesheet';
 import Create_Time_Entry from './components/time_entry/New_Time_Entry';
+import Create_Time_Entry1 from './components/time_entry/New_Time_Entry1';
 
 import Create_Task from './components/task/New_Task';
+import Create_Task1 from './components/task/New_Task1';
 import Task from './components/task/task';
 
 import Team from './components/team/New_Team';
@@ -43,6 +47,8 @@ import Manage_members from './components/manage_members/manage_members';
 import Company_member from './components/manage_members/add_member/company_member';
 import Project_member from './components/manage_members/add_member/project_member';
 import Team_member  from './components/manage_members/add_member/team_member';
+
+import Overview from './components/organisation_overview/organisation_overview';
 
 class App extends Component {
 	constructor(props){
@@ -77,14 +83,19 @@ class App extends Component {
         <Route exact path="/np" component={Create_Project}/>
         <Route exact path="/pp" component={Project_Page}/>
         <Route exact path="/cp" component={Client_Page}/>
+        <Route exact path="/rp" component={Regular_Page}/>        
 
         <Route exact path="/s" component={Standup}/>
         <Route exact path="/ns" component={Create_Standup}/>
+        <Route exact path="/ns1" component={Create_Standup1}/>
+
 
         <Route exact path="/t" component={Timesheet}/>
-        <Route exact path="/nt" component={Create_Time_Entry}/>
+        <Route exact path="/nt" component={Create_Time_Entry}/>        
+        <Route exact path="/nt1" component={Create_Time_Entry1}/>
 
         <Route exact path="/nta" component={Create_Task}/>
+        <Route exact path="/nta1" component={Create_Task1}/>
         <Route exact path="/ta" component={Task}/>
 
         <Route exact path="/nte" component={Team}/>
@@ -93,6 +104,7 @@ class App extends Component {
         <Route exact path="/ncm" component={Company_member}/>
         <Route exact path="/npm" component={Project_member}/>
         <Route exact path="/ntm" component={Team_member}/>
+        <Route exact path="/o" component={Overview}/>
       </Router>  
       </div>
       );

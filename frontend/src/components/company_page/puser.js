@@ -3,6 +3,8 @@ import cookie from 'react-cookies';
 import 'whatwg-fetch';
 import Project from '../project/project_list';
 
+import i1 from "../i1.jpeg";
+
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Badge from 'react-bootstrap/Badge';
@@ -15,14 +17,17 @@ class project extends Component{
 		this.createTask = this.createTask.bind(this)
 		this.createTimeEntry = this.createTimeEntry.bind(this)
 		this.createStandup = this.createStandup.bind(this)
-
+    	this.logout = this.logout.bind(this)
 	}
 
 	state = {
 	    projects : [],
 	    local: window.localStorage.getItem('email'),
 	  }
-
+	  logout(){
+	    window.localStorage.clear()
+	    this.props.history.push("/lo");
+	  }
 
 	createTask(){
 		let projects = this.state.projects
@@ -86,15 +91,31 @@ class project extends Component{
 		const company = this.props.location.state.company_name.company
 		const company_id = this.props.location.state.company_id.company_id
 		const role = this.props.location.state.role
+
+		const logo={
+		  background:"#00ff00",
+		  height:"60px"
+		};
+
+		const button={
+		  float:'right',
+		  margin:'10px 10px 0px 0px',
+		};
+
      	
 		return(
 			<div className="container">
+		        <div style={ logo }>
+		           <img style={{margin:"10px 10px 10px 10px"}} src={i1}/>
+		           <Button variant="warning"style={button} onClick={this.logout}>Logout</Button>
+		           <a href="/u" style={button}><Button>My profile</Button></a>
+		        </div><br/>
+
 				<Jumbotron style={{backgroundColor:"#F0F074"}}>
 					<center>
-						<h1><Badge variant="dark">Company_Details</Badge></h1>
+						<h1><Badge variant="dark">{company}_Details</Badge></h1>
 					</center>
 					<br/>
-					Name: {company}
 					<br/><br/><br/>
 					<Button variant="info" size="sm" onClick={this.createStandup}>+ Standup</Button>&nbsp;
 					<Button variant="info" size="sm" onClick={this.createTimeEntry}>+ TimeEntry</Button>
@@ -114,8 +135,7 @@ class project extends Component{
 				             return(
 				           		<ListGroup>
 				           			<ListGroup.Item variant="success">
-				           				<h1>{role}</h1>
-			                			<Project name={projectsitem.name} company= {company} total_budget={projectsitem.total_budget} budget_spent={projectsitem.budget_spent} deadline={projectsitem.deadline} routes={history_property} role={role}/>
+			                			<Project id={projectsitem.id} name={projectsitem.name} company= {company} total_budget={projectsitem.total_budget} budget_spent={projectsitem.budget_spent} deadline={projectsitem.deadline} routes={history_property} role={role}/>
 		                   			</ListGroup.Item>	
 		                   		</ListGroup>		
 			        	      )
@@ -125,7 +145,6 @@ class project extends Component{
 				             return(
 				           		<ListGroup>
 				           			<ListGroup.Item variant="success">
-				           				<h1>{role}</h1>
 			                			<Project id={projectsitem.id} name={projectsitem.name} company= {company} total_budget={projectsitem.total_budget} budget_spent={projectsitem.budget_spent} deadline={projectsitem.deadline} routes={history_property} role={role}/>
 		                   			</ListGroup.Item>	
 		                   		</ListGroup>		

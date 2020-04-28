@@ -3,6 +3,8 @@ import cookie from 'react-cookies';
 import 'whatwg-fetch';
 import Project from '../project/project_list';
 
+import i1 from "../i1.jpeg";
+
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Badge from 'react-bootstrap/Badge';
@@ -20,12 +22,21 @@ class project extends Component{
 		this.createStandup = this.createStandup.bind(this)
 		this.createTeam = this.createTeam.bind(this)
 		this.manage_members = this.manage_members.bind(this)
+		this.organisation_overview = this.organisation_overview.bind(this)
+	    this.logout = this.logout.bind(this)
+
 	}
 
 	state = {
 	    projects : [],
 	    local: window.localStorage.getItem('email'),
 	  }
+
+	  logout(){
+	    window.localStorage.clear()
+	    this.props.history.push("/lo");
+	  }
+
 
 	createProject(){
 		console.log(this.props)
@@ -70,6 +81,13 @@ class project extends Component{
 		this.props.history.push({pathname:"/mm"})	
 	}
 
+	organisation_overview(){
+		let company = this.props.location.state.company_name.company
+		let company_id = this.props.location.state.company_id.company_id
+		let companies = this.props.location.state.companies
+		this.props.history.push({pathname:"/o",state:{company_name:{company},company_id:{company_id},companies}})
+	}
+
 	displayProject(){
 	    const endpoint1 = 'http://127.0.0.1:8000/api/projects'
 	    const csrfToken = cookie.load('csrftoken')
@@ -106,16 +124,35 @@ class project extends Component{
 		const company = this.props.location.state.company_name.company
 		const company_id = this.props.location.state.company_id.company_id
 
+	    const logo={
+	      background:"#00ff00",
+	      height:"60px"
+	    };
+
+	    const button={
+	      float:'right',
+	      margin:'10px 10px 0px 0px',
+	    };
+
+	    const jumbo={
+	    	backgroundColor:"#F0F074",
+	    	height:'540px',
+	    };
+
 		return(
 			<div className="container">
-			<h1>THIS IS PADMIN</h1>
-				<Jumbotron style={{backgroundColor:"#F0F074"}}>
+		        <div style={ logo }>
+		           <img style={{margin:"10px 10px 10px 10px"}} src={i1}/>
+		           <Button variant="warning"style={button} onClick={this.logout}>Logout</Button>
+		           <a href="/u" style={button}><Button>My profile</Button></a>
+		        </div><br/>    
+			
+			<center><h1><Badge variant="success">ADMIN PAGE</Badge></h1></center>
+				<Jumbotron style={jumbo}>
 					<center>
-						<h1><Badge variant="dark">Company_Details</Badge></h1>
+						<h1><Badge variant="dark">{company}_Details</Badge></h1>
 					</center>
-					<br/>
-					Name: {company}
-					<br/><br/>							
+					<br/><br/>
 
 					<Jumbotron style={{float:"left"}}>
 						<center>
@@ -124,15 +161,18 @@ class project extends Component{
 						<Company_members id={company_id}/>
 					</Jumbotron>
 
-					<div>
-						<Button variant="info" size="sm"   style={{margin:"0px 0px 0px 20px"}} onClick={this.createStandup}>+ Standup</Button>&nbsp;
-						<Button variant="info" size="sm"   style={{float:"right"}} onClick={this.createTimeEntry}>+ TimeEntry</Button>&nbsp;<br/><br/>
-						<Button variant="info" size="sm"   style={{margin:"0px 0px 0px 20px"}} onClick={this.createTask}>+ Task</Button>&nbsp;
-						<Button variant="info" size="sm"   style={{float:"right"}} onClick={this.createProject}>+ Project</Button>&nbsp;&nbsp;&nbsp;<br/><br/>
-						<Button variant="info" size="sm"   style={{margin:"0px 0px 0px 20px"}} onClick={this.organisation_overview}>Organisation<br/>overview</Button>&nbsp;
-						<Button variant="info" size="sm"   style={{float:"right"}} onClick={this.manage_members}>Manage<br/>members</Button>&nbsp;<br/><br/>
-						<Button variant="info" size="sm"   style={{margin:"0px 0px 0px 20px"}} onClick={this.createTeam}>+ Team</Button>
-					</div>
+					<Jumbotron style={{float:"right"}}>
+						<Button variant="info" size="sm"   style={{}} onClick={this.createStandup}>+ Standup</Button>&nbsp;
+						<Button variant="info" size="sm"   style={{}} onClick={this.createTimeEntry}>+ TimeEntry</Button>&nbsp;
+						<Button variant="info" size="sm"   style={{}} onClick={this.createProject}>+ Project</Button>&nbsp;
+						<Button variant="info" size="sm"   style={{}} onClick={this.createTask}>+ Task</Button><br/><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<Button variant="info" size="sm"   style={{}} onClick={this.organisation_overview}>Organisation<br/>overview</Button>&nbsp;
+						<Button variant="info" size="sm"   style={{}} onClick={this.manage_members}>Manage<br/>members</Button><br/><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+						<Button variant="info" size="sm"   style={{}} onClick={this.createTeam}>+ Team</Button>
+					</Jumbotron>
 				</Jumbotron>
 
 				<Jumbotron style={{backgroundColor:""}}>

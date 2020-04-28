@@ -3,7 +3,7 @@ import cookie from 'react-cookies';
 import 'whatwg-fetch';
 import Button from 'react-bootstrap/Button';
 import tes from "./x.jpg";
-import i1 from "./i1.jpeg";
+import i1 from "./components/i1.jpeg";
 import i2 from "./i2.jpeg";
 import Jumbotron from 'react-bootstrap/Jumbotron';
 

@@ -7,18 +7,26 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Badge from 'react-bootstrap/Badge';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 
+import i1 from "../i1.jpeg";
+
 import Company from './company_list';
 
 class App extends Component {
     constructor(props){
     super(props);
     this.createCompany = this.createCompany.bind(this)
+    this.logout = this.logout.bind(this)
   }
 
   state = {
     companies : [],
     local_company: window.localStorage.getItem('email'),
     history_property: this.props,
+  }
+
+  logout(){
+    window.localStorage.clear()
+    this.props.history.push("/lo");
   }
 
 
@@ -61,10 +69,26 @@ class App extends Component {
     const {companies} = this.state
     const {local_company} = this.state
     const {history_property} = this.state
+
+    const logo={
+      background:"#00ff00",
+      height:"60px"
+    };
+
+    const button={
+      float:'right',
+      margin:'10px 10px 0px 0px',
+    };
     
     return(
       <div className="container">
       <br/>
+        <div style={ logo }>
+           <img style={{margin:"10px 10px 10px 10px"}} src={i1}/>
+           <Button variant="warning"style={button} onClick={this.logout}>Logout</Button>
+           <a href="/u" style={button}><Button>My profile</Button></a>
+        </div><br/>
+
         <Jumbotron style={{backgroundColor:"#FF6666"}}>
           <center>
             <h1><Badge variant="dark">MY Organisations</Badge></h1>

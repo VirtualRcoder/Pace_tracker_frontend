@@ -20,10 +20,12 @@ class project extends Component{
 		const company = this.props.company
 		const role = this.props.role
 		
-		if(role!="client")
-			this.props.routes.history.push({pathname:"/pp", state:{id,name,total_budget,budget_spent,deadline,company}})
-		else
+		if(role=="regular")
+			this.props.routes.history.push({pathname:"/rp", state:{id,name,total_budget,budget_spent,deadline,company}})
+		else if(role=="client")
 			this.props.routes.history.push({pathname:"/cp", state:{id,name,total_budget,budget_spent,deadline,company}})
+		else
+			this.props.routes.history.push({pathname:"/pp", state:{id,name,total_budget,budget_spent,deadline,company}})
 	}
 
 	render(){

@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import cookie from 'react-cookies';
 import 'whatwg-fetch';
 
+import i1 from "../i1.jpeg";
+import i2 from "../i2.jpeg";
+
+import Button from 'react-bootstrap/Button';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+
 
 class newTask extends Component {
 //Constructor
@@ -58,7 +64,7 @@ class newTask extends Component {
           .then(function(response){return response.json()})
           .then(function(responseData){
             console.log(responseData)
-            alert("Task Created")
+            alert("Task Created Successfully!!!\n Press Browser default Back Button")
 //            	com.props.history.push({pathname:"/p",state:{company_name:{company}}})
           })
         }
@@ -108,20 +114,27 @@ class newTask extends Component {
 
    	return(
    		<div className="container">
-   		<br/>
+  		<br/>
+   			<div style={ logo }>
+   				<img style={{margin:"10px 10px 10px 10px"}} src={i1}/>
+   			</div>
+   			<br/>
    			<center>
-	   		<form onSubmit={this.handleSubmit}>
-		      	<div>
-		      		<input style={ inputStyle } id="name" type="text" name="name" className="form-control" placeholder="Enter Name" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      		<input style={ inputStyle } id="description" type="text" name="description" className="form-control" placeholder="Enter description" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      		<input style={ inputStyle } id="deadline" type="text" name="deadline" className="form-control" placeholder="Enter deadline" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      	</div><br/><br/>
-				<button>Create</button>
-				<br/>
-			</form>
+	   			<Jumbotron>
+			   		<form onSubmit={this.handleSubmit}>
+				      	<div>
+				      		<input style={ inputStyle } id="name" type="text" name="name" className="form-control" placeholder="Enter Name" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      		<input style={ inputStyle } id="description" type="text" name="description" className="form-control" placeholder="Enter description" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      		<input style={ inputStyle } id="deadline" type="text" name="deadline" className="form-control" placeholder="Enter deadline" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      	</div><br/><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button variant="info" type="submit">Create</Button>
+					    <img style={ girlimg }src={ i2 }/>
+						<br/>
+					</form>
+				</Jumbotron>
 	      	</center>
 	    </div>  	
       )  

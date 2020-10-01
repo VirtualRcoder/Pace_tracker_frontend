@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import cookie from 'react-cookies';
 import 'whatwg-fetch';
 
+import i1 from "../i1.jpeg";
+import i2 from "../i2.jpeg";
+
+import Button from 'react-bootstrap/Button';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+
 class Company extends Component {
 //Constructor
 	constructor(props){
@@ -76,6 +82,7 @@ class Company extends Component {
 	      		.then(function(response){return response.json()})
 	      		.then(function(responseData){
 	        		console.log(responseData)
+			      	alert("Team Member Added!!!\n Press Back default browser Back Button")
 
 	//            if(window.localStorage.getItem("is_staff")=="true")
 	//           	com.props.history.push({pathname:"/mm"})
@@ -158,30 +165,37 @@ componentDidMount(){
 
    	return(
    		<div className="container">
-   		<br/>
+  		<br/>
+   			<div style={ logo }>
+   				<img style={{margin:"10px 10px 10px 10px"}} src={i1}/>
+   			</div>
+   			<br/>
    			<center>
-	   		<form onSubmit={this.handleSubmit}>
-		      	<div>
-					<select	value={team} name="team" style={selectStyle} onChange={this.handleInputChange}>
-			      		<option name="team" value="select">Select Team Name</option>
-		        		{teams.length > 0 ? teams.map((teamsitem, index) =>{
-			              return(
-		                		<option name="team" value={teamsitem.id}>{teamsitem.name}</option>
-		        	      )    
-			        	}): <p>Not found</p>}
-		        	</select>
-		        	<br/><br/>
-		      		<input style={ inputStyle } id="member" type="text" name="member" className="form-control" placeholder="Enter member" onChange={this.handleInputChange} />
-		      		<br/>
-					<select	value={role} name="role" style={selectStyle} onChange={this.handleInputChange}>
-			      		<option name="role" value="select">Select Role</option>
-			      		<option name="role" value="lead">Lead</option>
-			      		<option name="role" value="regular">Regular</option>
-			      	</select>
-		      	</div><br/><br/>
-				<button>Create</button>
-				<br/>
-			</form>
+	   			<Jumbotron>
+			   		<form onSubmit={this.handleSubmit}>
+				      	<div>
+							<select	value={team} name="team" style={selectStyle} onChange={this.handleInputChange}>
+					      		<option name="team" value="select">Select Team Name</option>
+				        		{teams.length > 0 ? teams.map((teamsitem, index) =>{
+					              return(
+				                		<option name="team" value={teamsitem.id}>{teamsitem.name}</option>
+				        	      )    
+					        	}): <p>Not found</p>}
+				        	</select>
+				        	<br/><br/>
+				      		<input style={ inputStyle } id="member" type="text" name="member" className="form-control" placeholder="Enter member" onChange={this.handleInputChange} />
+				      		<br/>
+							<select	value={role} name="role" style={selectStyle} onChange={this.handleInputChange}>
+					      		<option name="role" value="select">Select Role</option>
+					      		<option name="role" value="lead">Lead</option>
+					      		<option name="role" value="regular">Regular</option>
+					      	</select>
+				      	</div><br/><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button variant="info" type="submit">Create</Button>
+					    <img style={ girlimg }src={ i2 }/>
+						<br/>
+					</form>
+				</Jumbotron>
 	      	</center>
 	    </div>  	
       )  

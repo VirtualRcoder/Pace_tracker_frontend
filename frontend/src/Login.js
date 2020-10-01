@@ -125,7 +125,7 @@ class Login extends Component {
 		      		<br/>
 		      		<input style={ inputStyle } id="password" type="text" name="password" className="form-control" placeholder="Enter the password" onChange={this.handleInputChange} required="true"/>
 		      	</div><br/><br/>
-				<Button variant="info" onClick={this.handleSubmit}>Sign Up</Button>
+				<Button variant="info" onClick={this.handleSubmit}>Log IN</Button>
 				<br/>
 			    <img style={ girlimg }src={ i2 }/>
 			</form>

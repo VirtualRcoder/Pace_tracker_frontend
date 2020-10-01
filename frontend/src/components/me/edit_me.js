@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import cookie from 'react-cookies';
 import 'whatwg-fetch';
 
+import Button from 'react-bootstrap/Button';
+
 export default class edit  extends Component{
 
 //Constructor
@@ -56,7 +58,8 @@ export default class edit  extends Component{
 		  })
 		  .then(function(responseData){
 		  	if(responseData.error_type)
-			  	console.log(responseData)
+			  	alert(responseData.error_type + "Enter the details again")
+		      	alert("Details Updated Successfully!!!\nGoing to previous Page")
             	com.props.history.push("/u")
 			})
 		}
@@ -78,7 +81,7 @@ export default class edit  extends Component{
 			      		<input  id="last_name" type="text" name="last_name" className="form-control" placeholder="Enter the last_name" onChange={this.handleInputChange} required="true"/>
 			      		<br/>
 			      	</div><br/><br/>
-					<button>Sign Up</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button variant="info" type="submit">Update</Button>
 				</form>
 		      	</center>
 		    </div>  	

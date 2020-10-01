@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import cookie from 'react-cookies';
 import 'whatwg-fetch';
 
+import i1 from "../i1.jpeg";
+import i2 from "../i2.jpeg";
+
+import Button from 'react-bootstrap/Button';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+
 class newTask extends Component {
 //Constructor
 	constructor(props){
@@ -53,10 +59,14 @@ class newTask extends Component {
           .then(function(response){return response.json()})
           .then(function(responseData){
             console.log(responseData)
-            if(window.localStorage.getItem("is_staff")=="true")
+            if(window.localStorage.getItem("is_staff")=="true"){
+		      	alert("Standup Created Successfully!!!\n going to Previous Page")
             	com.props.history.push({pathname:"/padmin",state:{company_name:{company},company_id:{company_id}}})
-            else
+            }
+            else{
+            	alert("Standup Created Successfully!!!\n going to Previous Page")
             	com.props.history.push({pathname:"/p",state:{company_name:{company}}})
+            }
           })
         }
       }
@@ -101,34 +111,41 @@ class newTask extends Component {
 			float:"right",
 			width:"10%",
 		};
-
    	return(
    		<div className="container">
-   		<br/>
+  		<br/>
+   			<div style={ logo }>
+   				<img style={{margin:"10px 10px 10px 10px"}} src={i1}/>
+   			</div>
+   			<br/>
    			<center>
-	   		<form onSubmit={this.handleSubmit}>
-		      	<div>
-		      		<select	value={project}	name="project" style={selectStyle} onChange={this.handleInputChange}>
-		      		<option name="project" value="select">Select Project Name</option>
-	        		{projects.length > 0 ? projects.map((projectsitem, index) =>{
-		              return(
-	                		<option name="project" value={projectsitem.id}>{projectsitem.name}</option>
-	        	      )    
-		        	}): <p>Not found</p>}
-		        	</select>
-		        	<br/><br/>
-		        	<input style={ inputStyle } id="what_is_done" type="text" name="what_is_done" className="form-control" placeholder="Enter what_is_done" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      		<input style={ inputStyle } id="what_is_next" type="text" name="what_is_next" className="form-control" placeholder="Enter what_is_next" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      		<input style={ inputStyle } id="what_is_blocking" type="text" name="what_is_blocking" className="form-control" placeholder="Enter what_is_blocking" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      		<input style={ inputStyle } id="note" type="text" name="note" className="form-control" placeholder="Enter note" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      	</div><br/><br/>
-				<button>Create</button>
-				<br/>
-			</form>
+	   			<Jumbotron>
+			   		<form onSubmit={this.handleSubmit}>
+				      	<div>
+				      		<select	value={project}	name="project" style={selectStyle} onChange={this.handleInputChange}>
+				      		<option name="project" value="select">Select Project Name</option>
+			        		{projects.length > 0 ? projects.map((projectsitem, index) =>{
+				              return(
+			                		<option name="project" value={projectsitem.id}>{projectsitem.name}</option>
+			        	      )    
+				        	}): <p>Not found</p>}
+				        	</select>
+				        	<br/><br/>
+				        	<input style={ inputStyle } id="what_is_done" type="text" name="what_is_done" className="form-control" placeholder="Enter what_is_done" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      		<input style={ inputStyle } id="what_is_next" type="text" name="what_is_next" className="form-control" placeholder="Enter what_is_next" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      		<input style={ inputStyle } id="what_is_blocking" type="text" name="what_is_blocking" className="form-control" placeholder="Enter what_is_blocking" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      		<input style={ inputStyle } id="note" type="text" name="note" className="form-control" placeholder="Enter note" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      	</div><br/><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button variant="info" type="submit">Create</Button>
+					    <img style={ girlimg }src={ i2 }/>
+
+						<br/>
+					</form>
+				</Jumbotron>
 	      	</center>
 	    </div>  	
       )  

@@ -7,7 +7,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Badge from 'react-bootstrap/Badge';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 
-import TimeEntry from './display_timeEntry';
+import TimeEntry from './display_client_timeEntry';
 
 class App extends Component {
     constructor(props){
@@ -18,6 +18,7 @@ class App extends Component {
     timeEntries : [],
     tasks : [],
   }
+
 
 
   displaytimeEntry(){
@@ -39,7 +40,10 @@ class App extends Component {
          com.setState({
           timeEntries: responseData.results,
         })
+           console.log(com.props.location.state)
+           console.log(com.state.timeEntries)
       })
+
     }
 
     endpoint1 = 'http://127.0.0.1:8000/api/tasks'
@@ -58,7 +62,8 @@ class App extends Component {
          com.setState({
           tasks: responseData.results,
         })
-         console.log(com.state)
+
+      console.log(com.state.tasks)
       })
     }
   }
@@ -75,6 +80,7 @@ class App extends Component {
     const {timeEntries} = this.state
     const {tasks} = this.state
     const local_company= window.localStorage.getItem('email')
+    const {id} = this.props.location.state
 
     return(
       <div className="container">
@@ -86,13 +92,13 @@ class App extends Component {
         </Jumbotron>
         	{
         		timeEntries.length > 0 ? timeEntries.map((timeEntriesitem, index) =>{
-		            if(timeEntriesitem.created_by == local_company)
-		            {
+		            if(timeEntriesitem.project == id)
+		            {   
                   return(
                       tasks.length > 0 ? tasks.map((tasksitem, index) =>{
-                      if(timeEntriesitem.task == tasksitem.id){
+                     if(timeEntriesitem.task == tasksitem.id){
     		              return(
-                        <TimeEntry project={timeEntriesitem.project} modified={timeEntriesitem.modified_at} task={tasksitem.name} time_period={timeEntriesitem.time_period} comment={timeEntriesitem.comment}/>
+                        <TimeEntry project={timeEntriesitem.project} modified={timeEntriesitem.modified_at} created_by = {timeEntriesitem.created_by} task={tasksitem.name} time_period={timeEntriesitem.time_period} comment={timeEntriesitem.comment}/>
                       )
                     }
                        }): <p>Not found</p>

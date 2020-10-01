@@ -19,11 +19,11 @@ class Company extends Component{
 		return (
 			<Jumbotron style={{backgroundColor:"lightgreen"}}>
 				<Jumbotron>
-					Modified at:- &nbsp;{modified}<br/>
-					What is done:- &nbsp;{done}<br/>
-					What is next:- &nbsp;{next}<br/>
-					What is blocking:- &nbsp;{blocking}<br/><br/>
-					Note:- &nbsp;{note}
+					<u>Modified at</u>:- &nbsp;{modified}<br/><br/>
+					<u>What is done</u>:- &nbsp;{done}<br/>
+					<u>What is next</u>:- &nbsp;{next}<br/>
+					<u>What is blocking</u>:- &nbsp;{blocking}<br/><br/>
+					<u>Note</u>:- &nbsp;{note}
 				</Jumbotron>
 			</Jumbotron>
 		);

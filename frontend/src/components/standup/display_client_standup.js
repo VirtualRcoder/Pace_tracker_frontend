@@ -10,18 +10,22 @@ class Company extends Component{
 
 	render(){
 		const {project} = this.props
-		const {name} = this.props
-		const {description} = this.props
-		const {deadline} = this.props
+		const {done} = this.props
+		const {next} = this.props
+		const {blocking} = this.props
+		const {note} = this.props
 		const {modified} = this.props
+		const {created_by} = this.props
 
 		return (
 			<Jumbotron style={{backgroundColor:"lightgreen"}}>
 				<Jumbotron>
-					<u>Name</u>:-&nbsp;{name}<br/>
-					<u>Modified at</u>:-&nbsp;{modified}<br/><br/>
-					<u>Description</u>:- &nbsp;{description}<br/>
-					<u>Deadline</u>:- &nbsp;{deadline}
+					<u>Modified at</u>:- &nbsp;{modified}<br/>
+					<u>Created By</u>:- &nbsp;{created_by}<br/><br/>
+					<u>What is done</u>:- &nbsp;{done}<br/>
+					<u>What is next</u>:- &nbsp;{next}<br/>
+					<u>What is blocking</u>:- &nbsp;{blocking}<br/><br/>
+					<u>Note</u>:- &nbsp;{note}
 				</Jumbotron>
 			</Jumbotron>
 		);

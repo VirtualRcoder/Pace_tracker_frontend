@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import cookie from 'react-cookies';
 import 'whatwg-fetch';
 
+import i1 from "../i1.jpeg";
+import i2 from "../i2.jpeg";
+
+import Button from 'react-bootstrap/Button';
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 class newTeam extends Component {
 //Constructor
@@ -43,7 +48,7 @@ class newTeam extends Component {
 	    let company_id = this.props.location.state.company_id
 	    let companies = this.props.location.state.companies
             	com.props.history.push({pathname:"/padmin",state:{company_name:{company},company_id:{company_id},companies}})
-//		this.Login(data)
+		this.Login(data)
 	}
 //Login Taking Place	
 	Login(data){
@@ -69,10 +74,14 @@ class newTeam extends Component {
           .then(function(response){return response.json()})
           .then(function(responseData){
             console.log(responseData)
-            if(window.localStorage.getItem("is_staff")=="true")
+            if(window.localStorage.getItem("is_staff")=="true"){
+            	alert("Team Created Successfully!!!\n going to Previous Page")
             	com.props.history.push({pathname:"/padmin",state:{company_name:{company},company_id:{company_id},companies}})
-            else
+            }
+            else{
+            	alert("Team Created Successfully!!!\n going to Previous Page")
             	com.props.history.push({pathname:"/p",state:{company_name:{company}}})
+            }
           })
         }
       }
@@ -121,26 +130,33 @@ class newTeam extends Component {
 
    	return(
    		<div className="container">
-   		<br/>
+  		<br/>
+   			<div style={ logo }>
+   				<img style={{margin:"10px 10px 10px 10px"}} src={i1}/>
+   			</div>
+   			<br/>
    			<center>
-	   		<form onSubmit={this.handleSubmit}>
-		      	<div>
-		      		<input style={ inputStyle } id="name" type="text" name="name" className="form-control" placeholder="Enter Name" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      		<select	value={company}	name="company" style={selectStyle} onChange={this.handleInputChange}>
-		      		<option name="company" value="select">Select company Name</option>
-	        		{companies.length > 0 ? companies.map((companiesitem, index) =>{
-		              return(
-	                		<option name="company" value={companiesitem.id}>{companiesitem.name}</option>
-	        	      )    
-		        	}): <p>Not found</p>}
-		        	</select>
-		        	<br/><br/>
-		        	<input style={ inputStyle } id="created_by" type="text" name="created_by" value={window.localStorage.getItem("email")} className="form-control" placeholder="Created_by" onChange={this.handleInputChange}/>
-		      	</div><br/><br/>
-				<button>Create</button>
-				<br/>
-			</form>
+	   			<Jumbotron>
+			   		<form onSubmit={this.handleSubmit}>
+				      	<div>
+				      		<input style={ inputStyle } id="name" type="text" name="name" className="form-control" placeholder="Enter Name" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      		<select	value={company}	name="company" style={selectStyle} onChange={this.handleInputChange}>
+				      		<option name="company" value="select">Select company Name</option>
+			        		{companies.length > 0 ? companies.map((companiesitem, index) =>{
+				              return(
+			                		<option name="company" value={companiesitem.id}>{companiesitem.name}</option>
+			        	      )    
+				        	}): <p>Not found</p>}
+				        	</select>
+				        	<br/><br/>
+				        	<input style={ inputStyle } id="created_by" type="text" name="created_by" value={window.localStorage.getItem("email")} className="form-control" placeholder="Created_by" onChange={this.handleInputChange}/>
+				      	</div><br/><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button variant="info" type="submit">Create</Button>
+					    <img style={ girlimg }src={ i2 }/>
+						<br/>
+					</form>
+				</Jumbotron>
 	      	</center>
 	    </div>  	
       )  

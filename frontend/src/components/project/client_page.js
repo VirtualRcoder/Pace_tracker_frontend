@@ -15,12 +15,31 @@ class projectPage extends Component{
 	constructor(props){
 		super(props);
 		this.logout = this.logout.bind(this)
+		this.myTimeEntry = this.myTimeEntry.bind(this)
+		this.myTask = this.myTask.bind(this)
+		this.myStandup = this.myStandup.bind(this)
 	}
 
 	state = {
 	    timeEntries : [],
 	    tasks: [],
 	  }
+
+  	myTimeEntry(){
+	    const id = this.props.location.state.id
+		this.props.history.push({pathname:"/ct", state:{id}})		
+	}
+
+  	myTask(){
+	    const id = this.props.location.state.id
+		this.props.history.push({pathname:"/ta", state:{id}})		
+	}
+
+	myStandup(){
+	    const id = this.props.location.state.id
+		this.props.history.push({pathname:"/cs", state:{id}})		
+	}
+
 
 	logout(){
 		window.localStorage.clear()
@@ -56,7 +75,7 @@ class projectPage extends Component{
 	         com.setState({
 	          tasks: responseData.results,
 	        })
-
+	         console.log(com.props)
 	      })
 
 
@@ -140,7 +159,7 @@ class projectPage extends Component{
        			</Jumbotron>
 
        			<Jumbotron style={{backgroundColor:"#90F094"}}>
-	            	<h1 style={{float:'left'}}><Badge variant="dark">Time Sheet Of the Member You Selected</Badge></h1>
+	            	<h1 style={{float:'left'}}><Badge variant="dark">Time Sheet Of the Members</Badge></h1>
 	            	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	            	<Button variant="info" size="sm" onClick={this.myTimeEntry}>View all TimeEntries<br/>of this User</Button>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -150,7 +169,6 @@ class projectPage extends Component{
 		            <table style={{border:"2px solid black"}}>
 		            	<tr>
 		            		<td style={{border:"2px solid black"}}>Date_&_Time</td>
-		            		<td style={{border:"2px solid black"}}>Employee</td>
 		            		<td style={{border:"2px solid black"}}>Task_Name</td>
 		            		<td style={{border:"2px solid black"}}>Time_Period</td>
 		            		<td style={{border:"2px solid black"}}>Comment</td>
@@ -166,7 +184,7 @@ class projectPage extends Component{
 	            							{
 	              								return(
 
-	              									<td><a href="#">{tasksitem.name}</a></td>
+	              									<td style={{color:'#f000ff'}}>{tasksitem.name}</td>
 	              								)
 	            							}
 	        						}):<p>Not Found</p>

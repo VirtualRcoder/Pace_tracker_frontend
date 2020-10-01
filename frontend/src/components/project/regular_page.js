@@ -11,6 +11,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 
 import ProjectMember from '../manage_members/find_members/project_members';
 
+
 class projectPage extends Component{
 	constructor(props){
 		super(props);
@@ -70,7 +71,8 @@ class projectPage extends Component{
 
 
 	myTask(){
-		this.props.history.push({pathname:"/ta"})		
+		const id = this.props.location.state.id
+		this.props.history.push({pathname:"/ta",state:{id}})		
 	}
 
 
@@ -83,6 +85,7 @@ class projectPage extends Component{
 	myStandup(){
 		this.props.history.push({pathname:"/s"})	
 	}
+
 
 	displayProject(){
 	    let endpoint1 = 'http://127.0.0.1:8000/api/time_entries'
@@ -103,7 +106,6 @@ class projectPage extends Component{
 	         com.setState({
 	          timeEntries: responseData.results,
 	        })
-	         console.log(com.state.timeEntries)
 	      })
 
 	      endpoint1 = 'http://127.0.0.1:8000/api/tasks'
@@ -207,7 +209,7 @@ class projectPage extends Component{
 					          if(tasksitem.project == id)
 					            {										            	
 					              return(
-					              	<Button variant="warning" size="bg"style={{margin:'0px 10px 0px 0px'}}>{tasksitem.name}</Button>
+										<Button variant="warning" size="bg"style={{margin:'0px 10px 0px 0px'}}>{tasksitem.name}</Button>					              		
 					              	)
 					            }
 					        }):<p>Not Found</p>

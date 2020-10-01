@@ -13,12 +13,24 @@ import ProjectMember from '../manage_members/find_members/project_members1';
 class projectPage extends Component{
 	constructor(props){
 		super(props);    
-        this.logout = this.logout.bind(this)
+    this.logout = this.logout.bind(this)
+
+    this.myTimeEntry = this.myTimeEntry.bind(this)
+    this.myTask = this.myTask.bind(this)
+    this.myStandup = this.myStandup.bind(this)
+
+    this.createTask = this.createTask.bind(this)
+    this.myTask = this.myTask.bind(this)
+    this.createStandup = this.createStandup.bind(this)
+    this.myStandup = this.myStandup.bind(this)
+    this.createTimeEntry = this.createTimeEntry.bind(this)
+    this.myTimeEntry = this.myTimeEntry.bind(this)
 	}
 
   state = {
       timeEntries : [],
       tasks: [],
+      standups: [],
     }
 
 
@@ -28,41 +40,70 @@ class projectPage extends Component{
     }
 
 
-  displayProject(){
-      let endpoint1 = 'http://127.0.0.1:8000/api/time_entries'
-      const csrfToken = cookie.load('csrftoken')
-      let com = this
+    createTimeEntry(){
+      const projects = this.props.location.state.id
+      this.props.history.push({pathname:"/nt1",state:{projects}})    
+    }
 
-      if(csrfToken !== undefined){
-        let token = window.localStorage.getItem('token')
-        let lookupOptions1 = {
-          method: "GET",
-          headers: {'Content-Type': 'application/json','X-CSRFToken': csrfToken,
-          "Authorization":`Token ${token}`},
+    myTimeEntry(){
+      const id = this.props.location.state.id
+      this.props.history.push({pathname:"/ct", state:{id}})    
+    }
+
+    createTask(){
+      const projects = this.props.location.state.id
+      this.props.history.push({pathname:"/nta1",state:{projects}})    
+    }
+
+    myTask(){
+      const id = this.props.location.state.id
+      this.props.history.push({pathname:"/ta", state:{id}})    
+    }
+
+    createStandup(){
+      const projects = this.props.location.state.id
+      this.props.history.push({pathname:"/ns1",state:{projects}})
+    }
+
+    myStandup(){
+      const id = this.props.location.state.id
+      this.props.history.push({pathname:"/cs", state:{id}})    
+    }
+
+
+    displayProject(){
+        let endpoint1 = 'http://127.0.0.1:8000/api/time_entries'
+        const csrfToken = cookie.load('csrftoken')
+        let com = this
+
+        if(csrfToken !== undefined){
+          let token = window.localStorage.getItem('token')
+          let lookupOptions1 = {
+            method: "GET",
+            headers: {'Content-Type': 'application/json','X-CSRFToken': csrfToken,
+            "Authorization":`Token ${token}`},
+          }
+
+          fetch(endpoint1, lookupOptions1)
+          .then(function(response){return response.json()})
+          .then(function(responseData){
+             com.setState({
+              timeEntries: responseData.results,
+            })
+          })
+
+          endpoint1 = 'http://127.0.0.1:8000/api/tasks'
+          
+             fetch(endpoint1, lookupOptions1)
+          .then(function(response){return response.json()})
+          .then(function(responseData){
+             com.setState({
+              tasks: responseData.results,
+            })
+
+          })
         }
-
-        fetch(endpoint1, lookupOptions1)
-        .then(function(response){return response.json()})
-        .then(function(responseData){
-           com.setState({
-            timeEntries: responseData.results,
-          })
-        })
-
-        endpoint1 = 'http://127.0.0.1:8000/api/tasks'
-        
-           fetch(endpoint1, lookupOptions1)
-        .then(function(response){return response.json()})
-        .then(function(responseData){
-           com.setState({
-            tasks: responseData.results,
-          })
-
-        })
-
-
-      }
-  }
+    }
 
   componentDidMount(){
     this.setState({
@@ -144,7 +185,7 @@ class projectPage extends Component{
              </Jumbotron>
 
              <Jumbotron style={{backgroundColor:"#90F094"}}>
-                <h1 style={{float:'left'}}><Badge variant="dark">Time Sheet Of the Member You Selected</Badge></h1>
+                <h1 style={{float:'left'}}><Badge variant="dark">Time Sheet Of the Members of this project</Badge></h1>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <Button variant="info" size="sm" onClick={this.myTimeEntry}>View all TimeEntries<br/>of this User</Button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -169,7 +210,7 @@ class projectPage extends Component{
                             {
                                 return(
 
-                                  <td><a href="#">{tasksitem.name}</a></td>
+                                  <td style={{color:'#f000ff'}}>{tasksitem.name}</td>
                                 )
                             }
                       }):<p>Not Found</p>

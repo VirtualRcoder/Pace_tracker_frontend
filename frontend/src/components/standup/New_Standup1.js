@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import cookie from 'react-cookies';
 import 'whatwg-fetch';
 
+import i1 from "../i1.jpeg";
+import i2 from "../i2.jpeg";
+
+import Button from 'react-bootstrap/Button';
+import Jumbotron from 'react-bootstrap/Jumbotron';
 class newTask extends Component {
 //Constructor
 	constructor(props){
@@ -57,7 +62,7 @@ class newTask extends Component {
           .then(function(response){return response.json()})
           .then(function(responseData){
             console.log(responseData)
-            alert("Standup Created")
+            alert("Standup Created Successfully!!!\n Press browser default Back Button")
 //	           	com.props.history.push({pathname:"/ut"})
           })
         }
@@ -105,22 +110,30 @@ class newTask extends Component {
 
    	return(
    		<div className="container">
-   		<br/>
+  		<br/>
+   			<div style={ logo }>
+   				<img style={{margin:"10px 10px 10px 10px"}} src={i1}/>
+   			</div>
+   			<br/>
    			<center>
-	   		<form onSubmit={this.handleSubmit}>
-		      	<div>
-		        	<input style={ inputStyle } id="what_is_done" type="text" name="what_is_done" className="form-control" placeholder="Enter what_is_done" onChange={this.handleInputChange} />
-		      		<br/>
-		      		<input style={ inputStyle } id="what_is_next" type="text" name="what_is_next" className="form-control" placeholder="Enter what_is_next" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      		<input style={ inputStyle } id="what_is_blocking" type="text" name="what_is_blocking" className="form-control" placeholder="Enter what_is_blocking" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      		<input style={ inputStyle } id="note" type="text" name="note" className="form-control" placeholder="Enter note" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      	</div><br/><br/>
-				<button>Create</button>
-				<br/>
-			</form>
+	   			<Jumbotron>
+			   		<form onSubmit={this.handleSubmit}>
+				      	<div>
+				        	<input style={ inputStyle } id="what_is_done" type="text" name="what_is_done" className="form-control" placeholder="Enter what_is_done" onChange={this.handleInputChange} />
+				      		<br/>
+				      		<input style={ inputStyle } id="what_is_next" type="text" name="what_is_next" className="form-control" placeholder="Enter what_is_next" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      		<input style={ inputStyle } id="what_is_blocking" type="text" name="what_is_blocking" className="form-control" placeholder="Enter what_is_blocking" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      		<input style={ inputStyle } id="note" type="text" name="note" className="form-control" placeholder="Enter note" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      	</div><br/><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button variant="info" type="submit">Create</Button>
+					    <img style={ girlimg }src={ i2 }/>
+
+						<br/>
+					</form>
+				</Jumbotron>
 	      	</center>
 	    </div>  	
       )  

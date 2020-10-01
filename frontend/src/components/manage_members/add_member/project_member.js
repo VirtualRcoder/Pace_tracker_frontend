@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import cookie from 'react-cookies';
 import 'whatwg-fetch';
 
+import i1 from "../i1.jpeg";
+import i2 from "../i2.jpeg";
+
+import Button from 'react-bootstrap/Button';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+
 class Company extends Component {
 //Constructor
 	constructor(props){
@@ -76,7 +82,7 @@ class Company extends Component {
 	      		.then(function(response){return response.json()})
 	      		.then(function(responseData){
 	        		console.log(responseData)
-
+			      	alert("Project Member Added!!!\n Press Back default browser Back Button")
 	//            if(window.localStorage.getItem("is_staff")=="true")
 	//           	com.props.history.push({pathname:"/mm"})
 	//         else
@@ -159,32 +165,39 @@ componentDidMount(){
 
    	return(
    		<div className="container">
-   		<br/>
+  		<br/>
+   			<div style={ logo }>
+   				<img style={{margin:"10px 10px 10px 10px"}} src={i1}/>
+   			</div>
+   			<br/>
    			<center>
-	   		<form onSubmit={this.handleSubmit}>
-		      	<div>
-					<select	value={project} name="project" style={selectStyle} onChange={this.handleInputChange}>
-			      		<option name="project" value="select">Select Project Name</option>
-		        		{projects.length > 0 ? projects.map((projectsitem, index) =>{
-			              return(
-		                		<option name="project" value={projectsitem.id}>{projectsitem.name}</option>
-		        	      )    
-			        	}): <p>Not found</p>}
-		        	</select>
-		        	<br/><br/>
-		        	<input style={ inputStyle } id="member" type="text" name="member" className="form-control" placeholder="Enter member" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-					<select	value={role} name="role" style={selectStyle} onChange={this.handleInputChange}>
-			      		<option name="role" value="select">Select Role</option>
-			      		<option name="role" value="lead">Lead</option>
-			      		<option name="role" value="regular">Regular</option>
-			      		<option name="role" value="client">Client</option>
-			      		<option name="role" value="other">Other</option>	
-			      	</select>
-		      	</div><br/><br/>
-				<button>Create</button>
-				<br/>
-			</form>
+	   			<Jumbotron>
+			   		<form onSubmit={this.handleSubmit}>
+				      	<div>
+							<select	value={project} name="project" style={selectStyle} onChange={this.handleInputChange}>
+					      		<option name="project" value="select">Select Project Name</option>
+				        		{projects.length > 0 ? projects.map((projectsitem, index) =>{
+					              return(
+				                		<option name="project" value={projectsitem.id}>{projectsitem.name}</option>
+				        	      )    
+					        	}): <p>Not found</p>}
+				        	</select>
+				        	<br/><br/>
+				        	<input style={ inputStyle } id="member" type="text" name="member" className="form-control" placeholder="Enter member" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+							<select	value={role} name="role" style={selectStyle} onChange={this.handleInputChange}>
+					      		<option name="role" value="select">Select Role</option>
+					      		<option name="role" value="lead">Lead</option>
+					      		<option name="role" value="regular">Regular</option>
+					      		<option name="role" value="client">Client</option>
+					      		<option name="role" value="other">Other</option>	
+					      	</select>
+				      	</div><br/><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button variant="info" type="submit">Create</Button>
+					    <img style={ girlimg }src={ i2 }/>
+						<br/>
+					</form>
+				</Jumbotron>
 	      	</center>
 	    </div>  	
       )  

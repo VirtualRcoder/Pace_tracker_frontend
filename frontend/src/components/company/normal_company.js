@@ -86,7 +86,7 @@ state = {
         </div><br/>
         <Jumbotron style={{backgroundColor:"#FF6666"}}>
           <center>
-            <h1><Badge variant="dark">MY Organisations</Badge></h1>
+            <h1><Badge variant="dark">MY Organizations</Badge></h1>
           </center>
         </Jumbotron>
         {companies.length > 0 ? companies.map((companiesitem, index) =>{

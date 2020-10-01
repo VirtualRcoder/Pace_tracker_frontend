@@ -30,10 +30,12 @@ import Client_Page from './components/project/client_page';
 import Regular_Page from './components/project/regular_page';
 
 import Standup from './components/standup/standup';
+import Client_Standup from './components/standup/client_standup';
 import Create_Standup from './components/standup/New_Standup';
 import Create_Standup1 from './components/standup/New_Standup1';
 
 import Timesheet from './components/time_entry/timesheet';
+import Client_Timesheet from './components/time_entry/client_timesheet';
 import Create_Time_Entry from './components/time_entry/New_Time_Entry';
 import Create_Time_Entry1 from './components/time_entry/New_Time_Entry1';
 
@@ -86,11 +88,13 @@ class App extends Component {
         <Route exact path="/rp" component={Regular_Page}/>        
 
         <Route exact path="/s" component={Standup}/>
+        <Route exact path="/cs" component={Client_Standup}/>
         <Route exact path="/ns" component={Create_Standup}/>
         <Route exact path="/ns1" component={Create_Standup1}/>
 
 
         <Route exact path="/t" component={Timesheet}/>
+        <Route exact path="/ct" component={Client_Timesheet}/>
         <Route exact path="/nt" component={Create_Time_Entry}/>        
         <Route exact path="/nt1" component={Create_Time_Entry1}/>
 

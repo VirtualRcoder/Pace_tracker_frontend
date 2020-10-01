@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import cookie from 'react-cookies';
 import 'whatwg-fetch';
 
+import i1 from "../i1.jpeg";
+import i2 from "../i2.jpeg";
+
+import Button from 'react-bootstrap/Button';
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 class newTask extends Component {
 //Constructor
@@ -54,10 +59,14 @@ class newTask extends Component {
           .then(function(response){return response.json()})
           .then(function(responseData){
             console.log(responseData)
-            if(window.localStorage.getItem("is_staff")=="true")
+            if(window.localStorage.getItem("is_staff")=="true"){
+            	alert("Task Created Successfully!!!\n going to Previous Page")
             	com.props.history.push({pathname:"/padmin",state:{company_name:{company},company_id:{company_id}}})
-            else
+            }
+            else{
+            	alert("Task Created Successfully!!!\n going to Previous Page")
             	com.props.history.push({pathname:"/p",state:{company_name:{company}}})
+            }
           })
         }
       }
@@ -106,28 +115,36 @@ class newTask extends Component {
 
    	return(
    		<div className="container">
-   		<br/>
+  		<br/>
+   			<div style={ logo }>
+   				<img style={{margin:"10px 10px 10px 10px"}} src={i1}/>
+   			</div>
+   			<br/>
    			<center>
-	   		<form onSubmit={this.handleSubmit}>
-		      	<div>
-		      		<input style={ inputStyle } id="name" type="text" name="name" className="form-control" placeholder="Enter Name" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      		<input style={ inputStyle } id="description" type="text" name="description" className="form-control" placeholder="Enter description" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      		<input style={ inputStyle } id="deadline" type="text" name="deadline" className="form-control" placeholder="Enter deadline" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      		<select	value={project}	name="project" style={selectStyle} onChange={this.handleInputChange}>
-		      		<option name="project" value="select">Select Project Name</option>
-	        		{projects.length > 0 ? projects.map((projectsitem, index) =>{
-		              return(
-	                		<option name="project" value={projectsitem.id}>{projectsitem.name}</option>
-	        	      )    
-		        	}): <p>Not found</p>}
-		        	</select>
-		      	</div><br/><br/>
-				<button>Create</button>
-				<br/>
-			</form>
+	   			<Jumbotron>
+			   		<form onSubmit={this.handleSubmit}>
+				      	<div>
+				      		<input style={ inputStyle } id="name" type="text" name="name" className="form-control" placeholder="Enter Name" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      		<input style={ inputStyle } id="description" type="text" name="description" className="form-control" placeholder="Enter description" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      		<input style={ inputStyle } id="deadline" type="text" name="deadline" className="form-control" placeholder="Enter deadline" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      		<select	value={project}	name="project" style={selectStyle} onChange={this.handleInputChange}>
+				      		<option name="project" value="select">Select Project Name</option>
+			        		{projects.length > 0 ? projects.map((projectsitem, index) =>{
+				              return(
+			                		<option name="project" value={projectsitem.id}>{projectsitem.name}</option>
+			        	      )    
+				        	}): <p>Not found</p>}
+				        	</select>
+				      	</div><br/><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button variant="info" type="submit">Create</Button>
+					    <img style={ girlimg }src={ i2 }/>
+
+						<br/>
+					</form>
+				</Jumbotron>
 	      	</center>
 	    </div>  	
       )  

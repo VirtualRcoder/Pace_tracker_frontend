@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import cookie from 'react-cookies';
 import 'whatwg-fetch';
 
+import i1 from "../i1.jpeg";
+import i2 from "../i2.jpeg";
+
+import Button from 'react-bootstrap/Button';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+
 class Company extends Component {
 //Constructor
 	constructor(props){
@@ -46,7 +52,8 @@ class Company extends Component {
           fetch(endpoint, lookupOptions1)
           .then(function(response){return response.json()})
           .then(function(responseData){
-            console.log(responseData)
+            alert(responseData.error_type)
+	      	alert("Comapany created Successfully!!!\nGoing to previous Page")            
             com.props.history.push("/lc")
           })
         }
@@ -82,16 +89,23 @@ class Company extends Component {
 
    	return(
    		<div className="container">
-   		<br/>
+  		<br/>
+   			<div style={ logo }>
+   				<img style={{margin:"10px 10px 10px 10px"}} src={i1}/>
+   			</div>
+   			<br/>
    			<center>
-	   		<form onSubmit={this.handleSubmit}>
-		      	<div>
-		      		<input style={ inputStyle } id="name" type="text" name="name" className="form-control" placeholder="Enter Company_Name" onChange={this.handleInputChange} required="true"/>
-		      		<br/>
-		      	</div><br/><br/>
-				<button>Create</button>
-				<br/>
-			</form>
+	   			<Jumbotron>
+			   		<form onSubmit={this.handleSubmit}>
+				      	<div>
+				      		<input style={ inputStyle } id="name" type="text" name="name" className="form-control" placeholder="Enter Company_Name" onChange={this.handleInputChange} required="true"/>
+				      		<br/>
+				      	</div><br/><br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button variant="info" type="submit">Create</Button>
+					    <img style={ girlimg }src={ i2 }/>
+						<br/>
+					</form>
+				</Jumbotron>
 	      	</center>
 	    </div>  	
       )  
